@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private void initLocation() {
         LocationClientOption option = new LocationClientOption();
         option.setScanSpan(5000);
+        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
+        option.setIsNeedAddress(true);
         mLocationClient.setLocOption(option);
     }
 
@@ -91,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
             StringBuilder currentLocation = new StringBuilder();
             currentLocation.append("经度:").append(bdLocation.getLongitude()).append("\n");
             currentLocation.append("纬度:").append(bdLocation.getLatitude()).append("\n");
+            currentLocation.append("国家:").append(bdLocation.getCountry()).append("\n");
+            currentLocation.append("省份:").append(bdLocation.getProvince()).append("\n");
+            currentLocation.append("城市:").append(bdLocation.getCity()).append("\n");
+            currentLocation.append("区:").append(bdLocation.getDistrict()).append("\n");
+            currentLocation.append("街道:").append(bdLocation.getStreet()).append("\n");
             currentLocation.append("定位方式:");
             if (bdLocation.getLocType() == BDLocation.TypeGpsLocation) {
                 currentLocation.append("GPS");
