@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initLocation() {
-        LocationClientOption option = new
+        LocationClientOption option = new LocationClientOption();
+        option.setScanSpan(5000);
+        mLocationClient.setLocOption(option);
     }
 
     @Override
@@ -97,5 +99,11 @@ public class MainActivity extends AppCompatActivity {
             }
             positionText.setText(currentLocation);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLocationClient.stop();
     }
 }
