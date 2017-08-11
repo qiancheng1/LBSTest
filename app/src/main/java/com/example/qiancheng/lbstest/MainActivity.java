@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,10 +43,13 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
+        Log.d("qiancheng", "1111111111111111111111111111");
         if (!permissionList.isEmpty()) {
             String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+            Log.d("qiancheng", "2222222222222222222");
             ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
         } else {
+            Log.d("qiancheng", "33333333333333333");
             requestLocation();
         }
     }
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private void initLocation() {
         LocationClientOption option = new LocationClientOption();
         option.setScanSpan(5000);
-        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
+        //option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
         option.setIsNeedAddress(true);
         mLocationClient.setLocOption(option);
     }
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case 1:
                 if (grantResults.length > 0) {
+                    Log.d("qiancheng", "case1");
                     for (int result : grantResults) {
                         if (result != PackageManager.PERMISSION_GRANTED) {
                             Toast.makeText(MainActivity.this, "必须同意所有的权限才能使用本程序", Toast.LENGTH_SHORT).show();
@@ -104,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (bdLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
                 currentLocation.append("Network");
             }
+            Log.d("qiancheng ", "current" + currentLocation);
             positionText.setText(currentLocation);
         }
     }
